@@ -5,7 +5,9 @@ var player = [{
   y: 50
 }];
 
-var score = 0;
+var currentScore = 0;
+var gamesPlayed = 0;
+var highScore = 0;
 
 for ( var i = 0; i < 11; i++ ) {
   enemies[i] = {
@@ -51,7 +53,6 @@ var update = function () {
 var timer = function (interval) {
   setInterval( function() {
     update();
-    d3.select('.current').selectAll('span').text(score++);
     d3.selectAll('.enemies')
     .data( enemies )
     .transition()
@@ -71,11 +72,20 @@ timer(1000);
 d3.selectAll('.player').on('mousedown', function() {
   var player = d3.select(this);
 
+  //sets interval for collision check
   setInterval( function() {
+    d3.select('.current').selectAll('span').text(currentScore++);
     d3.select('body').selectAll('.enemies').each(function(d, i) {
-      console.log(collisionCheck(this));
+      if ( collisionCheck(this) ) {
+        d3.select('.games-played').selectAll('span').text(gamesPlayed++);
+        if (currentScore > highScore ) {
+          highScore = currentScore;
+          d3.select('.highscore').selectAll('span').text(highScore);
+        }
+        currentScore = 0;
+      }
     });
-  }, 10 );
+  }, 250 );
 
   var svg = d3.select('svg')
     .on('mousemove', mousemove);
