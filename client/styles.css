@@ -1,7 +1,10 @@
-svg.circle.enemies {
-  /*background-image: url("asteroid.png");*/
+.enemies {
+  background-image: url("asteroid.png");
 }
 
+.player {
+  
+}
 
 
 /*
