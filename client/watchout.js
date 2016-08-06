@@ -55,7 +55,7 @@ var timer = function (interval) {
     d3.selectAll('.enemies')
     .data( enemies )
     .transition()
-    .duration( interval * .75 )
+    .duration( interval * 1.0 )
     .attr('cx', function(d) { return d.x; })
     .attr('cy', function(d) { return d.y; });
   }, interval);
@@ -79,66 +79,22 @@ d3.selectAll('.player').on('mousedown', function() {
   function mousemove() {
     player.attr('cx', d3.mouse(svg.node())[0] )
     .attr('cy', d3.mouse(svg.node())[1]);
+
+    d3.select('body').selectAll('.enemies').each(function(d, i) {
+      console.log(collisionCheck(this));
+    
+    });
   }
 
-  var enemies = d3.selectAll('.enemies');
-  // console.log(enemies.selectAll('.enemies').select('.enemies')._parents[0].attributes[2].value);
-  // console.log( collisionCheck(d3.select('.enemies')));
-
-  // var stillPlaying = true;
-  // while (stillPlaying) {
-  //   for ( var i = 0; i < enemies.length; i++ ) {
-  //     console.log(enemies[i]);
-  //     if ( collisionCheck(enemies[i]) ) {
-  //       d3.select('.highscore').selectAll('span').text(score);
-  //       score = 0;
-  //     }
-  //   }
-  // }
+  //checks for collisions
   var collisionCheck = function (enemy) {
     var player = d3.selectAll('.player');
     var radiusPlayer = player.attr('r');
-    var radiusEnemy = enemy.attr('r');
-    var deltaX = +player.attr('cx') - +enemy.attr('cx');
-    var deltaY = +player.attr('cy') - +enemy.attr('cy');
-    var dist = Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY) ) - radiusPlayer - radiusEnemy;
+    var radiusEnemy = enemy.r.animVal.value;
+    var deltaX = player.attr('cx') - enemy.cx.animVal.value;
+    var deltaY = player.attr('cy') - enemy.cy.animVal.value;
+    var dist = (Math.sqrt( (deltaX * deltaX) + (deltaY * deltaY))) - radiusPlayer - radiusEnemy;
     return dist < 0;
   };
-  console.log( collisionCheck(d3.select('.enemies')));
-
-
-  console.log( collisionCheck( enemies.select('.enemies') ));
-
-  // var stillPlaying = true;
-  // while (stillPlaying) {
-  //   for (var i = 0; i < enemies.length; i++) {
-  //     if ( collisionCheck(enemies[i]) ) {
-  //       // stillPlaying = false;
-  //       // clearInterval(timer);
-  //       // stop game function call
-  //       // return;
-  //       // d3.select('.current').selectAll('span').text( 5 );
-  //       // console.log('crash');
-  //     }
-  //   }
-  // }
 
 });
-
-
-
-// checkCollision = (enemy, collidedCallback) ->
-//     _(players).each (player) ->
-//       radiusSum =  parseFloat(enemy.attr('r')) + player.r
-//       xDiff = parseFloat(enemy.attr('cx')) - player.x
-//       yDiff = parseFloat(enemy.attr('cy')) - player.y
-
-//       separation = Math.sqrt( Math.pow(xDiff,2) + Math.pow(yDiff,2) )
-//       collidedCallback(player, enemy) if separation < radiusSum
-// ¶
-// If we have a collision, just reset the score
-
-//   onCollision = ->
-//     updateBestScore()
-//     gameStats.score = 0
-//     updateScore()
