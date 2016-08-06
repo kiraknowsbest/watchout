@@ -71,6 +71,12 @@ timer(1000);
 d3.selectAll('.player').on('mousedown', function() {
   var player = d3.select(this);
 
+  setInterval( function() {
+    d3.select('body').selectAll('.enemies').each(function(d, i) {
+      console.log(collisionCheck(this));
+    });
+  }, 10 );
+
   var svg = d3.select('svg')
     .on('mousemove', mousemove);
 
@@ -80,10 +86,8 @@ d3.selectAll('.player').on('mousedown', function() {
     player.attr('cx', d3.mouse(svg.node())[0] )
     .attr('cy', d3.mouse(svg.node())[1]);
 
-    d3.select('body').selectAll('.enemies').each(function(d, i) {
-      console.log(collisionCheck(this));
-    
-    });
+    // d3.select('body').selectAll('.enemies').each(function(d, i) {
+    //   console.log(collisionCheck(this));
   }
 
   //checks for collisions
