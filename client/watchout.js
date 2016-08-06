@@ -26,7 +26,11 @@ d3.select('svg')
   .attr('cy', function(d) { return d.y; })
   .attr('r', 2)
   .attr('class', 'enemies')
-  .style('fill', 'red');
+  .style('fill', 'white')
+  .style('opacity', '.2')
+  .attr('xlink:href', 'asteroid.png')
+  .attr('width', 4)
+  .attr('height', 4);
 
 // player element
 d3.select('svg')
