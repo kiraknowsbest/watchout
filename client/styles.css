@@ -1,20 +1,14 @@
 svg {
   background-color: lightgray;
-  width: 90%;
-  height: auto;
   margin: 5px;
 }
 
-svg.enemies {
-  background-image: url("asteroid.png");
+.board {
+  width: 750px;
+  height: 600px;
+  z-index: -1;
 }
 
-.circles {
-  background-image: url("asteroid.png");
-  width: 10px;
-  height: 10px;
-}
-
-.player {
-  
+#asteroid {
+  background-image: 'asteroid.png';
 }
