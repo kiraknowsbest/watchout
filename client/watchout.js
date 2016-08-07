@@ -9,7 +9,7 @@ var currentScore = 0;
 var gamesPlayed = 0;
 var highScore = 0;
 
-for ( var i = 0; i < 11; i++ ) {
+for ( var i = 0; i < 26; i++ ) {
   enemies[i] = {
     x: 150 * Math.random(),
     y: 150 * Math.random()
@@ -17,22 +17,43 @@ for ( var i = 0; i < 11; i++ ) {
 }
 
 //appends svg board and patterns to DOM
-var svg = d3.select('.board')
+// d3.select('.board')
+//   .append('svg')
+//   .attr('viewBox', '0 0 150 150')
+//   .append('defs')
+//   .append('g')
+//   .attr('id', 'asteroid')
+//   .append('circle')
+//   .attr('x', '0')
+//   .attr('y', '0')
+//   .attr('r', '2')
+//   .attr('fill', 'asteroid.png');
+
+
+// d3.select('svg').selectAll('circle')
+//   .data( enemies )
+//   .enter()
+//   .append('circle')
+//   .attr('id', 'asteroid');
+
+
+d3.select('.board')
   .append('svg')
   .attr('viewBox', '0 0 150 150')
   .append('defs')
   .append('pattern')
+  .attr('patternUnits', 'objectBoundingBox')
   .attr('id', 'asteroid')
   .attr('x', '0')
   .attr('y', '0')
   .attr('height', '10')
   .attr('width', '10')
   .style('fill', 'svg:image')
-  .append('svg:image')
+  .append('image')
+  .attr('xlink:href', 'asteroid.png')
   .attr('x', '0')
   .attr('y', '0')
-  .attr('height', '4')
-  .attr('xlink:href', 'asteroid.png');
+  .attr('height', '4');
 
 // var defs = svg.append('defs');
 
@@ -65,11 +86,11 @@ d3.select('svg').selectAll('circle')
   .attr('cx', function(d) { return d.x; })
   .attr('cy', function(d) { return d.y; })
   .attr('r', 2)
+  .attr('fill', 'asteroid.png')
   .attr('class', 'enemies')
   .attr('id', 'asteroid')
   .attr('width', 4)
-  .attr('height', 4)
-  .attr('fill', 'url(#asteroid)');
+  .attr('height', 4);
   // .attr('x', '-8')
   // .attr('y', '-8')
   // .attr('width', '16')
