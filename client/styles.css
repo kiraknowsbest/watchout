@@ -1,5 +1,6 @@
 svg {
-  background-color: lightgray;
+  -webkit-mask-image: url(space.jpg);
+  mask-image: url('space.jpg');
   margin: 5px;
 }
 

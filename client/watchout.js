@@ -9,74 +9,43 @@ var currentScore = 0;
 var gamesPlayed = 0;
 var highScore = 0;
 
-for ( var i = 0; i < 26; i++ ) {
+for ( var i = 0; i < 10; i++ ) {
   enemies[i] = {
     x: 150 * Math.random(),
     y: 150 * Math.random()
   };
 }
 
-//appends svg board and patterns to DOM
-// d3.select('.board')
-//   .append('svg')
-//   .attr('viewBox', '0 0 150 150')
-//   .append('defs')
-//   .append('g')
-//   .attr('id', 'asteroid')
-//   .append('circle')
-//   .attr('x', '0')
-//   .attr('y', '0')
-//   .attr('r', '2')
-//   .attr('fill', 'asteroid.png');
-
-
-// d3.select('svg').selectAll('circle')
-//   .data( enemies )
-//   .enter()
-//   .append('circle')
-//   .attr('id', 'asteroid');
-
-
 d3.select('.board')
   .append('svg')
   .attr('viewBox', '0 0 150 150')
   .append('defs')
   .append('pattern')
-  .attr('patternUnits', 'objectBoundingBox')
   .attr('id', 'asteroid')
   .attr('x', '0')
   .attr('y', '0')
-  .attr('height', '10')
-  .attr('width', '10')
-  .style('fill', 'svg:image')
+  .attr('height', '15')
+  .attr('width', '15')
   .append('image')
   .attr('xlink:href', 'asteroid.png')
   .attr('x', '0')
   .attr('y', '0')
-  .attr('height', '4');
+  .attr('height', '15')
+  .attr('width', '15');
 
-// var defs = svg.append('defs');
-
-// var pattern = svg.append('pattern')
-//   .attr({
-//     'width': 20,
-//     'height': 20,
-//     fill: url('asteroid.png')
-//   });
-
-// svg.selectAll('circle')
-//   .data( enemies )
-//   .enter()
-//   .append('circle')
-//   .attr('cx', function(d) { return d.x; })
-//   .attr('cy', function(d) { return d.y; })
-//   .attr('r', 2)
-//   .attr('class', 'enemies')
-//   .attr('xlink:href', 'asteroid.png')
-//   .attr('width', 4)
-//   .attr('height', 4);
-
-
+d3.select('defs')
+  .append('pattern')
+  .attr('id', 'spaceman')
+  .attr('x', '0')
+  .attr('y', '0')
+  .attr('height', '15')
+  .attr('width', '15')
+  .append('image')
+  .attr('xlink:href', 'spaceman.png')
+  .attr('x', '0')
+  .attr('y', '0')
+  .attr('height', '15')
+  .attr('width', '15');
 
 // appends .enemies to svg
 d3.select('svg').selectAll('circle')
@@ -85,48 +54,13 @@ d3.select('svg').selectAll('circle')
   .append('circle')
   .attr('cx', function(d) { return d.x; })
   .attr('cy', function(d) { return d.y; })
-  .attr('r', 2)
-  .attr('fill', 'asteroid.png')
+  .attr('r', 7.5)
+  .attr('fill', 'url(#asteroid)')
   .attr('class', 'enemies')
   .attr('id', 'asteroid')
-  .attr('width', 4)
-  .attr('height', 4);
-  // .attr('x', '-8')
-  // .attr('y', '-8')
-  // .attr('width', '16')
-  // .attr('height', '16');
+  .attr('width', 15)
+  .attr('height', 15);
 
-// var svg = d3.select('svg');
-
-// var defs = d3.select('defs');
-
-// defs.append('svg:pattern')
-//   .attr('id', 'enemy-pattern')
-//   .attr('width', 4)
-//   .attr('height', 4)
-//   .append('svg:circle')
-//   .attr('xlink:href', 'svc:image') //this
-//   .attr('x', 100 * Math.random())
-//   .attr('y', 100 * Math.random())
-//   .attr('width', 4)
-//   .attr('height', 4);
-
-// var svg = d3.select(this.el)
-//   .append('svg')
-//   .attr('width', 750)
-//   .attr('height', 500);
-
-// var defs = svg.append('svg:defs');
-// defs.append('svg:pattern')
-//     .attr('id', 'enemy-pattern')
-//     .attr('width', '4')
-//     .attr('height', '4')
-//     .append('svg:image')
-//     .attr('xlink:href', 'asteroid.png')
-//     .attr('x', 100 * Math.random())
-//     .attr('y', 100 * Math.random())
-//     .attr('width', 4)
-//     .attr('height', 4);
 
 // player element
 d3.select('svg')
@@ -136,9 +70,12 @@ d3.select('svg')
   .append('circle')
   .attr('cx', function(d) { return d.x; })
   .attr('cy', function(d) { return d.y; })
-  .attr('r', 3)
+  .attr('r', 5)
+  .attr('fill', 'url(#spaceman)')
+  .attr('id', 'spaceman')
   .attr('class', 'player')
-  .style('fill', 'blue');
+  .attr('width', '15')
+  .attr('height', '15');
 
 // update enemies
 var update = function () {
